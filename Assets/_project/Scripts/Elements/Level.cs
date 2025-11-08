@@ -1,16 +1,25 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private LevelManager _levelManager;
+
+    private List<Brick> _bricks = new List<Brick>();
+
+    public void StartLevel(LevelManager levelManager)
     {
-        
+        _levelManager = levelManager;
+        _bricks = GetComponentsInChildren<Brick>().ToList();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void BrickDestroyed(Brick brick)
     {
-        
+        _bricks.Remove(brick);
+        if (_bricks.Count <= 0)
+        {
+            _levelManager.LevelCompleted();
+        }
     }
 }

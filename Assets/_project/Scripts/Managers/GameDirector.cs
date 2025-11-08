@@ -1,9 +1,17 @@
+using System;
 using UnityEngine;
 
 public class GameDirector : MonoBehaviour
 {
     public float timeScale;
     public LevelManager levelManager;
+
+    public UIManager uIManager;
+
+    private void Start()
+    {
+        uIManager.ShowMainMenu();
+    }
 
     private void Update()
     {
@@ -22,7 +30,7 @@ public class GameDirector : MonoBehaviour
         }
     }
 
-    private void RestartLevel()
+    public void RestartLevel()
     {
         levelManager.RestartLevel();
     }
@@ -39,4 +47,13 @@ public class GameDirector : MonoBehaviour
         RestartLevel();
     }
 
+    public void LevelCompleted()
+    {
+        Invoke(nameof(LoadNextLevel), 1);
+    }
+
+    public void LevelFailed()
+    {
+        uIManager.ShowFailUI();
+    }
 }

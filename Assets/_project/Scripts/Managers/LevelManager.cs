@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public GameDirector gameDirector;
+
     public List<Level> levels;
 
     public int levelNo;
@@ -26,8 +28,10 @@ public class LevelManager : MonoBehaviour
     private void CreateNewLevel()
     {
         levelNo = Mathf.Clamp(levelNo, 1, levels.Count);
+
         _currentLevel = Instantiate(levels[levelNo-1]);
         _currentLevel.transform.position = Vector3.zero;
+        _currentLevel.StartLevel(this);
     }
 
     private void DeleteOldLevel()
@@ -40,8 +44,9 @@ public class LevelManager : MonoBehaviour
 
     private void CreateNewBall()
     {
-        _currentBall = Instantiate(ballPrefab, transform);
+        _currentBall = Instantiate(ballPrefab);
         _currentBall.transform.position = new Vector3(0,-3,0);
+        _currentBall.StartBall(this);
     }
 
     private void DeleteOldBall()
@@ -54,6 +59,12 @@ public class LevelManager : MonoBehaviour
 
     public void LevelFailed()
     {
-        Invoke(nameof(RestartLevel), 1);
+        gameDirector.LevelFailed();
+    }
+
+    public void LevelCompleted()
+    {
+        _currentBall.StopBall();
+        gameDirector.LevelCompleted();
     }
 }

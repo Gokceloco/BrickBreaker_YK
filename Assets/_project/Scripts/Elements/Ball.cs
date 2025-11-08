@@ -1,8 +1,10 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public LevelManager levelManager;
+    private LevelManager _levelManager;
+
     public float speed;
 
     private Vector3 _dir;
@@ -11,8 +13,9 @@ public class Ball : MonoBehaviour
 
     private Rigidbody2D _rb;
 
-    void Start()
-    {        
+    public void StartBall(LevelManager levelManager)
+    {
+        _levelManager = levelManager;
         _dir = new Vector3(Random.Range(-.5f, .5f),1,0);
         _rb = GetComponent<Rigidbody2D>();
     }
@@ -29,7 +32,7 @@ public class Ball : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Bottom"))
         {
-            GetComponentInParent<LevelManager>().LevelFailed();
+            _levelManager.LevelFailed();
 
             gameObject.SetActive(false);
         }
@@ -42,5 +45,11 @@ public class Ball : MonoBehaviour
             var xOffset = transform.position.x - collision.transform.position.x;
             _dir.x = xOffset * xDirectionMultiplier;
         }
+    }
+
+    public void StopBall()
+    {
+        _dir = Vector3.zero;
+        transform.DOScale(0, .2f).SetEase(Ease.InBack);
     }
 }

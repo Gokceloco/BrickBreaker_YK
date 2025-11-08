@@ -13,6 +13,7 @@ public class Brick : MonoBehaviour
     private void Start()
     {
         _currentHealth = startHealth;
+        healthTMP.text = _currentHealth.ToString();
     }
 
     public void GetHit(int damage)
@@ -30,6 +31,7 @@ public class Brick : MonoBehaviour
 
     private void Die()
     {
+        GetComponentInParent<Level>().BrickDestroyed(this);
         gameObject.SetActive(false);
     }
 }
