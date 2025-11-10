@@ -21,5 +21,6 @@ public class Level : MonoBehaviour
         {
             _levelManager.LevelCompleted();
         }
+        _levelManager.gameDirector.fXManager.PlayBrickDestroyPS(brick.transform.position);
     }
 }

@@ -4,13 +4,19 @@ using UnityEngine;
 public class GameDirector : MonoBehaviour
 {
     public float timeScale;
-    public LevelManager levelManager;
+    public GameState gameState;
 
+    [Header("Managers")]
+    public LevelManager levelManager;
+    public AudioManager audioManager;
+    public FXManager fXManager;
     public UIManager uIManager;
+
 
     private void Start()
     {
         uIManager.ShowMainMenu();
+        gameState = GameState.MainMenu;
     }
 
     private void Update()
@@ -32,10 +38,11 @@ public class GameDirector : MonoBehaviour
 
     public void RestartLevel()
     {
+        gameState = GameState.GamePlay;
         levelManager.RestartLevel();
     }
 
-    private void LoadNextLevel()
+    public void LoadNextLevel()
     {
         levelManager.levelNo++;
         RestartLevel();
@@ -49,11 +56,23 @@ public class GameDirector : MonoBehaviour
 
     public void LevelCompleted()
     {
-        Invoke(nameof(LoadNextLevel), 1);
+        audioManager.PlayVictoryAS();
+        gameState = GameState.Win;
+        uIManager.ShowWinUI();
     }
 
     public void LevelFailed()
     {
+        audioManager.PlayFailAS();
+        gameState = GameState.Fail;
         uIManager.ShowFailUI();
     }
+}
+
+public enum GameState
+{
+    MainMenu,
+    GamePlay,
+    Win,
+    Fail,
 }

@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class FXManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public ParticleSystem impactPS;
+    public ParticleSystem brickDestroyPS;
 
-    // Update is called once per frame
-    void Update()
+    public void PlayBrickDestroyPS(Vector3 pos)
     {
-        
+        var newPS = Instantiate(brickDestroyPS);
+        newPS.transform.position = pos;
+        newPS.Play();
+    }
+    public void PlayImpactPS(Vector3 pos, Vector3 dir, Color color)
+    {
+        var newPS = Instantiate(impactPS);
+        newPS.transform.position = pos;
+        newPS.transform.LookAt(pos + dir);
+        var main = newPS.main;
+        main.startColor = color;
+        newPS.Play();
     }
 }

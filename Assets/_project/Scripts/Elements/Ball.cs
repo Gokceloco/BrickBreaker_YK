@@ -29,22 +29,29 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _dir = Vector3.Reflect(_dir, collision.contacts[0].normal);
+        var color = Color.white;
 
         if (collision.gameObject.CompareTag("Bottom"))
         {
             _levelManager.LevelFailed();
-
+            color = Color.red;
             gameObject.SetActive(false);
         }
         if (collision.gameObject.CompareTag("Brick"))
         {
             collision.gameObject.GetComponent<Brick>().GetHit(1);
+            _levelManager.gameDirector.audioManager.PlayBrickHitAS();
+            color = Color.yellow;
         }
         if (collision.gameObject.CompareTag("Player"))
         {
             var xOffset = transform.position.x - collision.transform.position.x;
             _dir.x = xOffset * xDirectionMultiplier;
+            color = new Color(0,.5f,1);
         }
+
+        _levelManager.gameDirector.fXManager.PlayImpactPS(collision.contacts[0].point, collision.contacts[0].normal, color);
+        _levelManager.gameDirector.audioManager.PlayBounceAS();
     }
 
     public void StopBall()

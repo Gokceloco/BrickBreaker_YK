@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class LoseUI : MonoBehaviour
+public class WinUI : MonoBehaviour
 {
     private CanvasGroup _canvasGroup;
 

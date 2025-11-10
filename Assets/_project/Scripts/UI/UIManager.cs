@@ -7,7 +7,8 @@ public class UIManager : MonoBehaviour
     public GameDirector gameDirector;
 
     public MainMenu mainMenu;
-    public LoseUI loseUI;
+    public FailUI failUI;
+    public WinUI winUI;
 
     public void StartGameButtonPressed()
     {
@@ -16,18 +17,26 @@ public class UIManager : MonoBehaviour
     }
     public void RetryButtonPressed()
     {
-        loseUI.Hide();
+        failUI.Hide();
         gameDirector.RestartLevel();
     }
-
+    public void NextLevelButtonPressed()
+    {
+        winUI.Hide();
+        gameDirector.LoadNextLevel();
+    }
     public void ShowMainMenu()
     {
         mainMenu.Show();
-        loseUI.Hide();
+        failUI.Hide();
+        winUI.Hide();
     }
-
     public void ShowFailUI()
     {
-        loseUI.Show();
+        failUI.Show();
+    }
+    public void ShowWinUI()
+    {
+        winUI.Show();
     }
 }

@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brick
       objectReference: {fileID: 0}
+    - target: {fileID: 5517265078094795512, guid: 7a6c5bf1199828a429e1d2c62bdcf9ac, type: 3}
+      propertyPath: startHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6631098135562318128, guid: 7a6c5bf1199828a429e1d2c62bdcf9ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -121,6 +125,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brick (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5517265078094795512, guid: 7a6c5bf1199828a429e1d2c62bdcf9ac, type: 3}
+      propertyPath: startHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6631098135562318128, guid: 7a6c5bf1199828a429e1d2c62bdcf9ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -182,6 +190,10 @@ PrefabInstance:
     - target: {fileID: 2143937681242837584, guid: 7a6c5bf1199828a429e1d2c62bdcf9ac, type: 3}
       propertyPath: m_Name
       value: Brick (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517265078094795512, guid: 7a6c5bf1199828a429e1d2c62bdcf9ac, type: 3}
+      propertyPath: startHealth
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6631098135562318128, guid: 7a6c5bf1199828a429e1d2c62bdcf9ac, type: 3}
       propertyPath: m_LocalPosition.x
